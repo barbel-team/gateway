@@ -50,7 +50,7 @@ public class JdbcTemplateMemberRepository implements MemberRepositoryInterface {
     public int idDuplicateCheck(String id) {
         int data = 1;
 
-        String result = jdbcTemplate.query("SELECT id01 FROM shoppingmall.member WHERE id01 = ?", rs -> {
+        String result = jdbcTemplate.query("SELECT id01 FROM member.member WHERE id01 = ?", rs -> {
             String id01 = null;
             if (rs.next()) {
                 id01 = rs.getString("id01");
@@ -68,7 +68,7 @@ public class JdbcTemplateMemberRepository implements MemberRepositoryInterface {
     public int nicknameDuplicateCheck(String nickname) {
         int data = 1;
 
-        String result = jdbcTemplate.query("SELECT n_name FROM shoppingmall.member WHERE n_name = ?", rs -> {
+        String result = jdbcTemplate.query("SELECT n_name FROM member.member WHERE n_name = ?", rs -> {
             String n_name = null;
             if (rs.next()) {
                 n_name = rs.getString("n_name");
@@ -85,7 +85,7 @@ public class JdbcTemplateMemberRepository implements MemberRepositoryInterface {
     public int mailDuplicateCheck(String mail) {
         int data = 1;
 
-        String result = jdbcTemplate.query("SELECT email01 FROM shoppingmall.member WHERE email01 = ?", rs -> {
+        String result = jdbcTemplate.query("SELECT email01 FROM member.member WHERE email01 = ?", rs -> {
             String email = null;
             if (rs.next()) {
                 email = rs.getString("email01");
