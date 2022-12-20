@@ -46,6 +46,19 @@ public class HomeController {
         model.addAttribute("product", p);
         return "/product/productDetail";
     }
+    @PostMapping
+    public String orderProduct(Member m, Model model) {
+
+        Gson gson = new Gson();
+        RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+        String url = "http://localhost:4001/register";
+        String json = gson.toJson(m);
+        System.out.println(json);
+        HttpEntity<String> result = template.postForEntity(url, m,String.class);
+
+        return "redirect:/";
+    }
+
 //
 //    @GetMapping("/products")
 //    public String productDetail(@RequestParam long id, Model model) {
