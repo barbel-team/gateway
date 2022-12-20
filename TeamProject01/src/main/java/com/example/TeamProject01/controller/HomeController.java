@@ -28,7 +28,7 @@ public class HomeController {
     public String home(HttpServletRequest request, Model model) {
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://localhost:8080/products";
+        String url = "http://product:4002/products";
         HttpEntity<String> result = template.getForEntity(url, String.class);
         System.out.println(result.getBody());
         Product[] p  = gson.fromJson(result.getBody(), Product[].class);
@@ -49,7 +49,7 @@ public class HomeController {
         System.out.println(m.getAddr01());
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://localhost:8080/registers";
+        String url = "http://member:4001/register";
         String json = gson.toJson(m);
         System.out.println(json);
         HttpEntity<String> result = template.postForEntity(url, m,String.class);

@@ -19,3 +19,5 @@ ADD ${JAR_FILE} to-do-springboot.jar
 
 # Run the jar file
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/to-do-springboot.jar"]
+
+# java -Djava.security.egd=file:/dev/./urandom -jar /to-do-springboot.jar
