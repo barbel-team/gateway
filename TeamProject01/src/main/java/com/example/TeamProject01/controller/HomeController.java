@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
@@ -26,7 +27,7 @@ public class HomeController {
     public String home(HttpServletRequest request, Model model) {
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://product:4002/products";
+        String url = "http://localhost:4002/products";
         HttpEntity<String> result = template.getForEntity(url, String.class);
         System.out.println(result.getBody());
         Product[] p  = gson.fromJson(result.getBody(), Product[].class);
@@ -34,13 +35,37 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/products")
+    public String detail(@RequestParam long id, Model model)  {
+        Gson gson = new Gson();
+        RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+        String url = "http://localhost:4002/product/?id=" + id;
+        System.out.println(url);
+        HttpEntity<String> result = template.getForEntity(url, String.class);
+        Product p  = gson.fromJson(result.getBody(), Product.class);
+        model.addAttribute("product", p);
+        return "/product/productDetail";
+    }
+//
+//    @GetMapping("/products")
+//    public String productDetail(@RequestParam long id, Model model) {
+//        Gson gson = new Gson();
+//        RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+//        String url = "http://localhost:4002/product/?id=" + id;
+//        System.out.println(url);
+//        HttpEntity<String> result = template.getForEntity(url, String.class);
+//        Product p  = gson.fromJson(result.getBody(), Product.class);
+//        model.addAttribute("product", p);
+//        return "/product/singleProduct";
+//    }
+
 
 
     @GetMapping("/myCart")
     public String cart(HttpServletRequest request, Model model) {
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://product:4002/mylikes";
+        String url = "http://localhost:4002/mylikes";
         HttpEntity<String> result = template.getForEntity(url, String.class);
         System.out.println(result.getBody());
         CartResponse[] p  = gson.fromJson(result.getBody(), CartResponse[].class);
@@ -54,7 +79,7 @@ public class HomeController {
         System.out.println(m.getAddr01());
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://member:4001/register";
+        String url = "http://localhost:4001/register";
         String json = gson.toJson(m);
         System.out.println(json);
         HttpEntity<String> result = template.postForEntity(url, m,String.class);

@@ -81,18 +81,15 @@
                     <div class="card">
                         <div class="thumb-content">
                             <!-- <div class="price">$200</div> -->
-                            <a href="product/singleProduct.html">
+                            <a href=th:href="@{/products(id=${product.getUid()})}">
                                 <img class="card-img-top img-fluid" th:src= "${product.getPrd_img_url()}" alt="Card image cap">
                             </a>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title"><a href="product/singleProduct.html">[[${product.prd_name}]]</a></h4>
+                            <h4 class="card-title"><a th:href="@{/products(id=${product.getUid()})}">[[${product.prd_name}]]</a></h4>
                             <ul class="list-inline product-meta">
                                 <li class="list-inline-item">
-                                    <a href="product/singleProduct.html"><i class="fa fa-folder-open-o"></i>[[${product.prd_ment}]]</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><i class="fa fa-calendar"></i>₩[[${product.prd_price}]]</a>
+                                    <a th:href="@{/products(id=${product.getUid()})}"><i class="fa fa-folder-open-o"></i>[[${product.prd_ment}]]</a>
                                 </li>
                             </ul>
                             <p class="card-text">[[${product.prd_price}]]원</p>
