@@ -1,5 +1,7 @@
-package com.barbel.product_service.dto;
+package com.example.TeamProject01.Domain;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +11,12 @@ import lombok.Getter;
 @Getter
 @Builder
 public class CartResponse {
-  private int id;
-  private long uid;
-  private long ordnum;
-  private int amount;
-  private int cart_chk;
-  private int cart_pay;
-  private String prd_name;
-  private String prd_pic_url;
+  public int id;
+  public long uid;
+  public long ordnum;
+  public int amount;
+  public int cart_chk;
+  public int cart_pay;
+  public String prd_name;
+  public String prd_pic_url;
 }

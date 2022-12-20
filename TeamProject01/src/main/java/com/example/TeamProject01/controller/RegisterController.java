@@ -1,20 +1,29 @@
 package com.example.TeamProject01.controller;
 
+import com.example.TeamProject01.Domain.CartResponse;
 import com.example.TeamProject01.Domain.Member;
 import com.example.TeamProject01.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.sql.Timestamp;
+import com.google.gson.Gson;
 import java.text.ParseException;
-import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-@Controller
-@RequestMapping(value = "/register")
+@RestController
+@RequestMapping("/register")
 public class RegisterController {
-
+    Logger logger = LoggerFactory.getLogger(RegisterController.class);
     @Autowired
     MemberService service;
 
@@ -23,16 +32,7 @@ public class RegisterController {
         this.service = service;
     }
 
-    @PostMapping // 슬러쉬를 붙이지 않으면 이전의 URL 뒤에 이어서 URL 이 나옴, 그리고 슬러쉬를 붙이면
-    // Localhost: XXXX 뒤에 이어서 나옴
-    public String create(@Valid Member m) throws ParseException {
-        // 우리는 사용자가 입력한 name 값을 가지고 객체를 만듦
 
-        // DB에 넣어야 함.
-
-        service.save(m); // 여기에다가 memberForm 을 그대로 때려 넣는것은 좀 아님.
-        return "redirect:/";
-    }
 
     @ResponseBody
     @GetMapping("/idcheck")

@@ -1,8 +1,5 @@
-package com.barbel.product_service.mapper;
+package com.example.TeamProject01.Domain;
 
-import com.barbel.product_service.dto.CartResponse;
-import com.barbel.product_service.entity.Cart;
-import com.barbel.product_service.entity.Product;
 
 public class CartResponseMapper {
   public static CartResponse mapping(Cart cart, Product product) {

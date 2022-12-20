@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 public class ProductImage {
 
     private String uuid;
-    private int productid; //product uid
+    private long productid; //product uid
     private String imgname;
     private String contenttype;
 
-    public ProductImage(String uuid, String imgname, String contenttype, @NotNull int productid){
+    public ProductImage(String uuid, String imgname, String contenttype, @NotNull long productid){
 
         this.uuid = uuid;
         this.imgname = imgname;

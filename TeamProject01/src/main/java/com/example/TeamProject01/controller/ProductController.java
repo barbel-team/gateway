@@ -46,7 +46,8 @@ public class ProductController {
                         UUID.randomUUID().toString(),
                         file.getOriginalFilename(),
                         file.getContentType(),
-                        p.getUid() // product의 uid를 productid로 가져오기.
+                        p.getUid()
+                        // product의 uid를 productid로 가져오기.
                 );
                 list.add(pi);
                 service.uploadImage(pi);
@@ -58,6 +59,9 @@ public class ProductController {
         }
         model.addAttribute("files",list);
 
+
         return "redirect:/";
-    }
+}
+
+
 }
