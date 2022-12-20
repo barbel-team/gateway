@@ -1,9 +1,5 @@
 package com.example.TeamProject01.repository;
 
-import com.example.TeamProject01.Domain.Inquiry;
-import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import static org.assertj.core.api.Assertions.assertThat;
 /*
 public class JdbcTemplateInquiryRepositoryTest {

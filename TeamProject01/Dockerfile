@@ -15,7 +15,7 @@ ARG JAR_FILE=build/libs/TeamProject01-0.0.1-SNAPSHOT.jar
 # Add the application's jar to the container
 ADD ${JAR_FILE} to-do-springboot.jar
 
-
+RUN /bin/bash
 
 # Run the jar file
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/to-do-springboot.jar"]

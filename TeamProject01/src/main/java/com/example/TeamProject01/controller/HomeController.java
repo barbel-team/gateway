@@ -1,8 +1,6 @@
 package com.example.TeamProject01.controller;
 
-import com.example.TeamProject01.Domain.Cart;
 import com.example.TeamProject01.Domain.CartResponse;
-import com.example.TeamProject01.Domain.CartResponseMapper;
 import com.example.TeamProject01.Domain.Member;
 import com.example.TeamProject01.Domain.Product;
 import com.example.TeamProject01.service.MemberService;
@@ -40,6 +38,13 @@ public class HomeController {
 
     @GetMapping("/myCart")
     public String cart(HttpServletRequest request, Model model) {
+        Gson gson = new Gson();
+        RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+        String url = "http://product:4002/mylikes";
+        HttpEntity<String> result = template.getForEntity(url, String.class);
+        System.out.println(result.getBody());
+        CartResponse[] p  = gson.fromJson(result.getBody(), CartResponse[].class);
+        model.addAttribute("carts", p);
         return "/myPage/myCart";
     }
 
@@ -59,24 +64,4 @@ public class HomeController {
     }
 
 
-    @GetMapping("/myOrder")
-    public String order(HttpServletRequest request, Model model) {
-        return "/myPage/myOrder";
-    }
-
-    @GetMapping("/myLike")
-    public String like(HttpServletRequest request, Model model) {
-        return "/myPage/myLike";
-    }
-
-
-    @GetMapping("/myInquiry")
-    public String inquiry(HttpServletRequest request, Model model) {
-        return "/myPage/myInquiry";
-    }
-
-    @GetMapping("/myReview")
-    public String review(HttpServletRequest request, Model model) {
-        return "/myPage/myReview";
-    }
 }
