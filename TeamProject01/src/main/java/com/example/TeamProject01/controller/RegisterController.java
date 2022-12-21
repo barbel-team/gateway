@@ -33,10 +33,9 @@ public class RegisterController {
     }
 
 
-
     @ResponseBody
     @GetMapping("/idcheck")
-    public int idchecked(@RequestParam("id") String id){
+    public int idchecked(@RequestParam("id") String id) {
         int data = service.idCheck(id);
         return data;
     }

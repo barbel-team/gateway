@@ -30,7 +30,7 @@ public class pageController {
     }
 
     @PostMapping("/aboutUs")
-    public String goAboutUs(){
+    public String goAboutUs() {
         return "contact/aboutUs";
     }
 
@@ -74,7 +74,7 @@ public class pageController {
 
     // 상품등록
     @GetMapping("/addlist")
-    public String goAddList(){
+    public String goAddList() {
         return "product/addProduct";
     }
 

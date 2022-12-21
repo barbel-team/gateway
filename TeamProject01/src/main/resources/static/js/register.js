@@ -303,3 +303,8 @@ function nicknamedupTest() {
         }
     }
 
+    function ord_handler() {
+        alert("주문이 완료되었습니다!")
+        return true;
+    }
+

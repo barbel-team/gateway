@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3308/member?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mariadb://memberDB:3308/member?characterEncoding=UTF-8&serverTimezone=UTC
     username: barbel
     password: barbel!
 

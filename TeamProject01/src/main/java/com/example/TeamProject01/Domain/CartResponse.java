@@ -11,12 +11,12 @@ import lombok.Getter;
 @Getter
 @Builder
 public class CartResponse {
-  public int id;
-  public long uid;
-  public long ordnum;
-  public int amount;
-  public int cart_chk;
-  public int cart_pay;
-  public String prd_name;
-  public String prd_pic_url;
+    public int id;
+    public long uid;
+    public long ordnum;
+    public int amount;
+    public int cart_chk;
+    public int cart_pay;
+    public String prd_name;
+    public String prd_pic_url;
 }
