@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class HomeController {
+    private static final String PRODUCT_HOSTNAME = "product";
+    private static final String MEMBER_HOSTNAME = "member";
 
     @Autowired
     MemberService service;
@@ -34,7 +37,7 @@ public class HomeController {
     public String home(HttpServletRequest request, Model model) {
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://product:4002/products";
+        String url = "http://" + PRODUCT_HOSTNAME+ ":4002/products";
         HttpEntity<String> result = template.getForEntity(url, String.class);
         System.out.println(result.getBody());
         Product[] p = gson.fromJson(result.getBody(), Product[].class);
@@ -46,12 +49,12 @@ public class HomeController {
     public String detail(@RequestParam long id, Model model) {
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://product:4002/product/?id=" + id;
+        String url = "http://" + PRODUCT_HOSTNAME+ ":4002/product/?id=" + id;
         System.out.println(url);
         HttpEntity<String> result = template.getForEntity(url, String.class);
         Product p = gson.fromJson(result.getBody(), Product.class);
         model.addAttribute("product", p);
-        return "/product/productDetail";
+        return "product/productDetail";
     }
 
     @PostMapping(value = "/orders", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -59,7 +62,7 @@ public class HomeController {
 //        System.out.println(product.getPrd_ment());
 //        Order.builder().fk_prd_num((int) product.getUid()).
         model.addAttribute("productId", product.getUid());
-        return "/member/orderTemp";
+        return "member/orderTemp";
     }
 
     @PostMapping(value = "/orderr", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -69,7 +72,7 @@ public class HomeController {
         Order order = Order.builder().res_nm(res_nm).res_addr01(res_addr01).res_addr02(res_addr02)
                 .res_addr03(res_addr03).res_tel(res_tel).fk_prdnum(fk_prdnum).deliv_req(deliv_req).build();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://product:4002/order";
+        String url = "http://" + PRODUCT_HOSTNAME+ ":4002/order";
         String json = gson.toJson(order);
         System.out.println(json);
         HttpEntity<String> result = template.postForEntity(url, order, String.class);
@@ -87,19 +90,23 @@ public class HomeController {
 //        Product p  = gson.fromJson(result.getBody(), Product.class);
 //        model.addAttribute("product", p);
 //        return "/product/singleProduct";
-//    }
-
+//
 
     @GetMapping("/myCart")
     public String cart(HttpServletRequest request, Model model) {
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://product:4002/mylikes";
+        String url = "http://" + PRODUCT_HOSTNAME+ ":4002/mylikes";
         HttpEntity<String> result = template.getForEntity(url, String.class);
         System.out.println(result.getBody());
         CartResponse[] p = gson.fromJson(result.getBody(), CartResponse[].class);
         model.addAttribute("carts", p);
         return "/myPage/myCart";
+    }
+
+    @GetMapping("/ping")
+    public ResponseEntity<String> checkAlive() {
+        return ResponseEntity.ok("OK");
     }
 
     @PostMapping("/register")
@@ -108,7 +115,7 @@ public class HomeController {
         System.out.println(m.getAddr01());
         Gson gson = new Gson();
         RestTemplate template = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-        String url = "http://member:4001/register";
+        String url = "http://" + MEMBER_HOSTNAME+  ":4001/register";
         String json = gson.toJson(m);
         System.out.println(json);
         HttpEntity<String> result = template.postForEntity(url, m, String.class);
