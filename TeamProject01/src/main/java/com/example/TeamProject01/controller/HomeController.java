@@ -27,8 +27,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class HomeController {
-    private static final String PRODUCT_HOSTNAME = "product";
-    private static final String MEMBER_HOSTNAME = "member";
+    private static final String PRODUCT_HOSTNAME = "localhost";
+    private static final String MEMBER_HOSTNAME = "localhost";
 
     @Autowired
     MemberService service;
@@ -102,11 +102,6 @@ public class HomeController {
         CartResponse[] p = gson.fromJson(result.getBody(), CartResponse[].class);
         model.addAttribute("carts", p);
         return "/myPage/myCart";
-    }
-
-    @GetMapping("/ping")
-    public ResponseEntity<String> checkAlive() {
-        return ResponseEntity.ok("OK");
     }
 
     @PostMapping("/register")
